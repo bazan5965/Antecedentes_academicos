@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antecedentes Académicos</title>
+    <title>Formulario Académico Personalizado</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -176,11 +176,6 @@
         const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
-        // Inicializar Firebase
-        let app, db, auth;
-        let userId = null;
-        let authReady = false;
-
         // Datos del programa académico "Tronco común de la L.F. y M."
         const troncoComunData = {
             creditosTotales: 312,
@@ -231,20 +226,18 @@
         // Función de autenticación de Firebase
         async function authenticate() {
             try {
-                app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                auth = getAuth(app);
+                const app = initializeApp(firebaseConfig);
+                const db = getFirestore(app);
+                const auth = getAuth(app);
                 
                 if (initialAuthToken) {
                     await signInWithCustomToken(auth, initialAuthToken);
                 } else {
                     await signInAnonymously(auth);
                 }
-                userId = auth.currentUser.uid;
-                authReady = true;
-
+                const userId = auth.currentUser.uid;
+                loadData(db, userId);
                 console.log('Autenticación exitosa.');
-                loadData();
             } catch (error) {
                 console.error("Error al autenticar:", error);
                 showFeedback("Error de autenticación: Por favor, intente recargar la página.", false);
@@ -252,8 +245,7 @@
         }
 
         // Función para cargar los datos del usuario desde Firestore
-        async function loadData() {
-            if (!authReady || !userId) return;
+        async function loadData(db, userId) {
             try {
                 const docRef = doc(db, 'artifacts', appId, 'users', userId, 'academic_form_data', 'my_form');
                 const docSnap = await getDoc(docRef);
@@ -286,21 +278,6 @@
                 }
             } catch (error) {
                 console.error("Error al cargar datos:", error);
-            }
-        }
-
-        // Función para guardar los datos en Firestore
-        async function saveData(data) {
-            if (!authReady || !userId) {
-                showFeedback("Error de autenticación. No se puede guardar.", false);
-                return;
-            }
-            try {
-                const docRef = doc(db, 'artifacts', appId, 'users', userId, 'academic_form_data', 'my_form');
-                await setDoc(docRef, data, { merge: true });
-                console.log("Datos guardados exitosamente en Firestore.");
-            } catch (error) {
-                console.error("Error al guardar datos:", error);
             }
         }
 
@@ -403,23 +380,29 @@
                 return;
             }
 
-            let dataToSave = {
-                preferredName: preferredNameInput.value,
-                studentId: studentIdInput.value,
-                materia: selectedMateria,
-                travelTime: {
-                    homeToSchoolHours: parseInt(homeToSchoolHoursInput.value) || 0,
-                    homeToSchoolMinutes: parseInt(homeToSchoolMinutesInput.value) || 0,
-                    schoolToHomeHours: parseInt(schoolToHomeHoursInput.value) || 0,
-                    schoolToHomeMinutes: parseInt(schoolToHomeMinutesInput.value) || 0,
-                }
-            };
-
             // Validaciones
             if (!preferredNameInput.value || !studentIdInput.value || !selectedMateria) {
                 showFeedback("Por favor, complete los campos básicos.", false);
                 return;
             }
+            
+            // Obtener los valores de tiempo de traslado y formatearlos
+            const homeToSchoolFormatted = `${parseInt(homeToSchoolHoursInput.value) || 0}h ${parseInt(homeToSchoolMinutesInput.value) || 0}m`;
+            const schoolToHomeFormatted = `${parseInt(schoolToHomeHoursInput.value) || 0}h ${parseInt(schoolToHomeMinutesInput.value) || 0}m`;
+            const totalTravelMinutes = ((parseInt(homeToSchoolHoursInput.value) || 0) + (parseInt(schoolToHomeHoursInput.value) || 0)) * 60 + ((parseInt(homeToSchoolMinutesInput.value) || 0) + (parseInt(schoolToHomeMinutesInput.value) || 0));
+            const totalTravelHoursFormatted = Math.floor(totalTravelMinutes / 60);
+            const totalTravelMinutesFormatted = totalTravelMinutes % 60;
+
+            let dataToSave = {
+                preferredName: preferredNameInput.value,
+                studentId: studentIdInput.value,
+                materia: selectedMateria,
+                travelTime: {
+                    homeToSchoolFormatted: homeToSchoolFormatted,
+                    schoolToHomeFormatted: schoolToHomeFormatted,
+                    totalTravelFormatted: `${totalTravelHoursFormatted}h ${totalTravelMinutesFormatted}m`
+                }
+            };
 
             if (selectedMateria === 'calculo-2' || selectedMateria === 'calculo-3') {
                 const grade = parseFloat(averageGradeInput.value);
@@ -427,21 +410,62 @@
                     showFeedback("Por favor, ingrese un promedio válido (6.0 o mayor).", false);
                     return;
                 }
-                
-                dataToSave.accreditedCredits = parseInt(accreditedCreditsInput.value) || 0;
-                dataToSave.accreditedMaterias = parseInt(accreditedMateriasInput.value) || 0;
-                dataToSave.schoolPeriods = parseInt(schoolPeriodsInput.value) || 0;
-                dataToSave.averageGrade = grade;
-                dataToSave.materiasCount = {
-                    reprobadasNoInscribir: parseInt(reprobadasNoInscribirInput.value) || 0,
-                    reprobadasSiInscribir: parseInt(reprobadasSiInscribirInput.value) || 0,
-                    porPrimeraVez: parseInt(porPrimeraVezInput.value) || 0,
-                };
+
+                const accreditedCredits = parseFloat(accreditedCreditsInput.value) || 0;
+                const accreditedMaterias = parseFloat(accreditedMateriasInput.value) || 0;
+                const schoolPeriods = parseFloat(schoolPeriodsInput.value) || 0;
+                const totalProgramCredits = troncoComunData.creditosTotales;
+                const totalProgramSemesters = troncoComunData.semestresTotales;
+                const remainingCredits = totalProgramCredits - accreditedCredits;
+                const remainingSemesters = totalProgramSemesters - schoolPeriods;
+                const indicador = remainingSemesters > 0 ? (remainingCredits / remainingSemesters) : 0;
+                const velocidad = schoolPeriods > 0 ? (accreditedMaterias / schoolPeriods) : 0;
+
+                Object.assign(dataToSave, {
+                    accreditedCredits: accreditedCredits,
+                    accreditedMaterias: accreditedMaterias,
+                    schoolPeriods: schoolPeriods,
+                    averageGrade: grade,
+                    indicador: indicador,
+                    velocidad: velocidad,
+                    materiasCount: {
+                        reprobadasNoInscribir: parseInt(reprobadasNoInscribirInput.value) || 0,
+                        reprobadasSiInscribir: parseInt(reprobadasSiInscribirInput.value) || 0,
+                        porPrimeraVez: parseInt(porPrimeraVezInput.value) || 0,
+                    }
+                });
             }
-            
+
+            // URL del despliegue de Apps Script
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxb66lD51tzkpVQkMqHUOrNsIefqejyd_mvntComyBIqa3OKOYyE-jYM_buvoX1sVQ/exec'; 
+
             showFeedback("Enviando datos...", false);
-            await saveData(dataToSave);
-            showFeedback("✅ Datos enviados y guardados correctamente!", true);
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(dataToSave),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (!response.ok) {
+                    showFeedback(`Error en la solicitud HTTP: ${response.status} ${response.statusText}. Por favor, revise la URL del script y los permisos.`, false);
+                    console.error('Error en la respuesta de la red:', response);
+                    return;
+                }
+
+                const result = await response.json();
+                if (result.status === 'success') {
+                    showFeedback("✅ Datos enviados y guardados correctamente en Google Sheets!", true);
+                } else {
+                    showFeedback(`Error al enviar los datos: ${result.message}`, false);
+                }
+            } catch (error) {
+                // Este bloque captura errores de red como "Failed to fetch"
+                showFeedback("Error de red o de conexión. Asegúrese de que el script de Google esté desplegado como 'Aplicación web' para que 'Cualquiera' lo ejecute, y que la URL sea correcta. También verifique si tiene conexión a internet.", false);
+                console.error('Error en la conexión:', error);
+            }
         });
         
         // Iniciar la autenticación al cargar la página
