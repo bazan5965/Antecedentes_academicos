@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antecedentes Académicos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .section-hidden {
+            display: none;
+        }
+        .message-container {
+            transition: all 0.3s ease-in-out;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+        .message-container.visible {
+            opacity: 1;
+            max-height: 100px;
+        }
+    </style>
+</head>
+<body class="bg-white flex items-center justify-center min-h-screen p-4 relative">
+
+    <div id="main-content" class="container bg-white p-8 rounded-lg shadow-xl w-full max-w-4xl mx-auto border-4 border-[#C1121F]">
+        <header class="text-center mb-8">
+            <h1 class="text-2xl font-bold text-[#003049]">Formulario Personalizado</h1>
+            <p class="mt-2 text-gray-600">Completa tu información según la materia elegida.</p>
+        </header>
+
+        <form id="academic-form">
+            <!-- Sección de Información Básica -->
+            <section class="p-4 bg-gray-50 rounded-md mb-8 border-l-4 border-[#780000]">
+                <h2 class="text-xl font-semibold text-[#003049] mb-4">Información Personal</h2>
+                <div class="mb-4">
+                    <label for="preferred-name" class="block text-sm font-medium text-gray-700">¿Cómo quieres que me refiera a ti?</label>
+                    <input type="text" id="preferred-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#FDF0D5] focus:ring-[#FDF0D5] sm:text-sm p-2" placeholder="Ej. Juan" required oninput="this.value = this.value.replace(/\s/g, '')" pattern="^\S+$">
+                </div>
+                <div class="mb-4">
+                    <label for="student-id" class="block text-sm font-medium text-gray-700">Número de Boleta:</label>
+                    <input type="text" id="student-id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#FDF0D5] focus:ring-[#FDF0D5] sm:text-sm p-2" placeholder="Ej. 2023xxxxxx" minlength="10" maxlength="10" required>
+                </div>
+            </section>
+
+            <!-- Sección de Materia -->
+            <section class="p-4 bg-gray-50 rounded-md mb-8 border-l-4 border-[#780000]">
+                <h2 class="text-xl font-semibold text-[#003049] mb-4">Selección de Materia</h2>
+                <div class="mb-4">
+                    <label for="materia-select" class="block text-sm font-medium text-gray-700">Selecciona tu materia:</label>
+                    <select id="materia-select" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#FDF0D5] focus:ring-[#FDF0D5] sm:text-sm p-2">
+                        <option value="">-- Seleccionar --</option>
+                        <option value="calculo-1">Cálculo 1</option>
+                        <option value="calculo-2">Cálculo 2</option>
+                        <option value="calculo-3">Cálculo 3</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- Sección de Traslados (Visible para todas las materias) -->
+            <section id="travel-time-section" class="section-hidden p-4 bg-gray-50 rounded-md mb-8 border-l-4 border-[#780000]">
+                <h2 class="text-xl font-semibold text-[#003049] mb-4">Tiempos de Traslado</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Tiempo de traslado casa-escuela:</label>
+                        <div class="flex items-center mt-1">
+                            <input type="number" id="home-to-school-hours" class="w-1/2 rounded-md border-gray-300 shadow-sm focus:border-[#FDF0D5] focus:ring-[#FDF0D5] sm:text-sm p-2" min="0" placeholder="Horas">
+                            <span class="mx-2 text-gray-500">h</span>
+                            <input type="number" id="home-to-school-minutes" class="w-1/2 rounded-md border-gray-300 shadow-sm focus:border-[#FDF0D5] focus:ring-[#FDF0D5] sm:text-sm p-2" min="0" max="59" placeholder="Minutos">
+                            <span class="mx-2 text-gray-500">m</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Tiempo de traslado escuela-casa:</label>
+                        <div class="flex items-center mt-1">
+                            <input type="number" id="school-to-home-hours" class="w-1/2 rounded-md border-gray-300 shadow-sm focus:border-[#FDF0D5] focus:ring-[#FDF0D5] sm:text-sm p-2" min="0" placeholder="Horas">
+                            <span class="mx-2 text-gray-500">h</span>
+                            <input type="number" id="school-to-home-minutes" class="w-1/2 rounded-md border-gray-300 shadow-sm focus:border-[#FDF0D5] focus:ring-[#FDF0D5] sm:text-sm p-2" min="0" max="59" placeholder="Minutos">
+                            <span class="mx-2 text-gray-500">m</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 p-4 bg-gray-100 rounded-md text-center">
+                    <h4 class="text-md font-semibold text-gray-700">Tiempo Total de Traslado:</h4>
+                    <p id="total-travel-time" class="text-3xl font-bold text-[#669BBC] mt-2">0h 0m</p>
+                </div>
+            </section>
+
+            <!-- Sección de Indicadores (Visible solo para Cálculo 2 y 3) -->
+            <section id="indicators-section" class="section-hidden p-4 bg-gray-50 rounded-md mb-8 border-l-4 border-[#780000]">
+                <h2 class="text-xl font-semibold text-[#003049] mb-4">Indicadores Académicos</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="accredited-credits" class="block text-sm font-medium text-gray-700">
+                            Número de créditos acreditados:
+                        </label>
+                        <input type="number" id="accredited-credits" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#FDF0D5] focus:ring-[#FDF0D5] sm:text-sm p-2" min="0" required>
+                    </div>
+                    <div>
+                        <label for="accredited-materias" class="block text-sm font-medium text-gray-700">
+                            Número de unidades de aprendizaje acreditadas:
+                        </label>
+                        <input type="number" id="accredited-materias" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#FDF0D5] focus:ring-[#FDF0D5] sm:text-sm p-2" min="0" required>
+                    </div>
+                    <div>
+                        <label for="school-periods" class="block text-sm font-medium text-gray-700">
+                            Cantidad de periodos escolares cursados:
+                        </label>
+                        <input type="number" id="school-periods" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#FDF0D5] focus:ring-[#FDF0D5] sm:text-sm p-2" min="1" required>
+                    </div>
+                    <div>
+                        <label for="average-grade" class="block text-sm font-medium text-gray-700">
+                            Promedio de <strong>materias acreditadas</strong>:
+                        </label>
+                        <input type="number" id="average-grade" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#FDF0D5] focus:ring-[#FDF0D5] sm:text-sm p-2" min="6.0" step="0.01" placeholder="Ej. 8.5">
+                        <div id="average-grade-error" class="text-red-600 text-sm mt-1 hidden">El promedio no puede ser menor a 6.0.</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                    <div class="p-4 bg-gray-100 rounded-md text-center">
+                        <h4 class="text-md font-semibold text-gray-700">Indicador de Avance:</h4>
+                        <p id="indicador-output" class="text-3xl font-bold text-[#669BBC] mt-2">N/A</p>
+                    </div>
+                    <div class="p-4 bg-gray-100 rounded-md text-center">
+                        <h4 class="text-md font-semibold text-gray-700">Velocidad de Avance:</h4>
+                        <p id="velocidad-output" class="text-3xl font-bold text-[#669BBC] mt-2">N/A</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de Tablas (Visible solo para Cálculo 2 y 3) -->
+            <section id="tables-section" class="section-hidden p-4 bg-gray-50 rounded-md mb-8 border-l-4 border-[#780000]">
+                <h2 class="text-xl font-semibold text-[#003049] mb-4">Unidades de Aprendizaje</h2>
+                <div class="space-y-6">
+                    <div>
+                        <label for="reprobadas-no-inscribir" class="block text-sm font-medium text-gray-700">Número de unidades reprobadas, que NO va a inscribir:</label>
+                        <input type="number" id="reprobadas-no-inscribir" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#FDF0D5] focus:ring-[#FDF0D5] sm:text-sm p-2" min="0" value="0">
+                    </div>
+                    <div>
+                        <label for="reprobadas-si-inscribir" class="block text-sm font-medium text-gray-700">Número de unidades reprobadas, que SÍ va a inscribir:</label>
+                        <input type="number" id="reprobadas-si-inscribir" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#FDF0D5] focus:ring-[#FDF0D5] sm:text-sm p-2" min="0" value="0">
+                    </div>
+                    <div>
+                        <label for="por-primera-vez" class="block text-sm font-medium text-gray-700">Número de unidades a inscribir por primera vez:</label>
+                        <input type="number" id="por-primera-vez" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#FDF0D5] focus:ring-[#FDF0D5] sm:text-sm p-2" min="0" value="0">
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Botón de Envío -->
+            <div class="text-center mt-8 no-print flex justify-center">
+                <button type="button" id="submit-btn" class="w-full md:w-auto px-6 py-2 bg-[#C1121F] text-white font-semibold rounded-md hover:bg-[#780000] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#C1121F]">
+                    Enviar Datos
+                </button>
+            </div>
+            
+            <!-- Mensajes de estado -->
+            <div id="feedback-message" class="message-container bg-gray-100 p-3 rounded-md text-sm text-center font-medium"></div>
+        </form>
+    </div>
+
+    <!-- Script de Lógica del Formulario y Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Variables globales de Firebase
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        // Inicializar Firebase
+        let app, db, auth;
+        let userId = null;
+        let authReady = false;
+
+        // Datos del programa académico "Tronco común de la L.F. y M."
+        const troncoComunData = {
+            creditosTotales: 312,
+            semestresTotales: 12
+        };
+
+        // Elementos del DOM
+        const materiaSelect = document.getElementById('materia-select');
+        const travelSection = document.getElementById('travel-time-section');
+        const indicatorsSection = document.getElementById('indicators-section');
+        const tablesSection = document.getElementById('tables-section');
+        const submitBtn = document.getElementById('submit-btn');
+        const feedbackMessageDiv = document.getElementById('feedback-message');
+        const preferredNameInput = document.getElementById('preferred-name');
+        const studentIdInput = document.getElementById('student-id');
+        const averageGradeInput = document.getElementById('average-grade');
+        const averageGradeError = document.getElementById('average-grade-error');
+        const homeToSchoolHoursInput = document.getElementById('home-to-school-hours');
+        const homeToSchoolMinutesInput = document.getElementById('home-to-school-minutes');
+        const schoolToHomeHoursInput = document.getElementById('school-to-home-hours');
+        const schoolToHomeMinutesInput = document.getElementById('school-to-home-minutes');
+        const totalTravelTimeOutput = document.getElementById('total-travel-time');
+        const reprobadasNoInscribirInput = document.getElementById('reprobadas-no-inscribir');
+        const reprobadasSiInscribirInput = document.getElementById('reprobadas-si-inscribir');
+        const porPrimeraVezInput = document.getElementById('por-primera-vez');
+        const indicadorOutput = document.getElementById('indicador-output');
+        const velocidadOutput = document.getElementById('velocidad-output');
+        const accreditedCreditsInput = document.getElementById('accredited-credits');
+        const accreditedMateriasInput = document.getElementById('accredited-materias');
+        const schoolPeriodsInput = document.getElementById('school-periods');
+
+        // Función para mostrar mensajes de estado
+        function showFeedback(message, isSuccess = false) {
+            feedbackMessageDiv.textContent = message;
+            feedbackMessageDiv.classList.add('visible');
+            if (isSuccess) {
+                feedbackMessageDiv.classList.remove('text-red-600');
+                feedbackMessageDiv.classList.add('bg-green-100', 'text-green-700');
+            } else {
+                feedbackMessageDiv.classList.remove('bg-green-100', 'text-green-700');
+                feedbackMessageDiv.classList.add('text-red-600');
+            }
+            setTimeout(() => {
+                feedbackMessageDiv.classList.remove('visible');
+            }, 5000);
+        }
+
+        // Función de autenticación de Firebase
+        async function authenticate() {
+            try {
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                userId = auth.currentUser.uid;
+                authReady = true;
+
+                console.log('Autenticación exitosa.');
+                loadData();
+            } catch (error) {
+                console.error("Error al autenticar:", error);
+                showFeedback("Error de autenticación: Por favor, intente recargar la página.", false);
+            }
+        }
+
+        // Función para cargar los datos del usuario desde Firestore
+        async function loadData() {
+            if (!authReady || !userId) return;
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'users', userId, 'academic_form_data', 'my_form');
+                const docSnap = await getDoc(docRef);
+                
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    preferredNameInput.value = data.preferredName || '';
+                    studentIdInput.value = data.studentId || '';
+                    materiaSelect.value = data.materia || '';
+                    
+                    homeToSchoolHoursInput.value = data.travelTime?.homeToSchoolHours || '';
+                    homeToSchoolMinutesInput.value = data.travelTime?.homeToSchoolMinutes || '';
+                    schoolToHomeHoursInput.value = data.travelTime?.schoolToHomeHours || '';
+                    schoolToHomeMinutesInput.value = data.travelTime?.schoolToHomeMinutes || '';
+                    calculateTravelTime();
+                    
+                    if (data.materia === 'calculo-2' || data.materia === 'calculo-3') {
+                        accreditedCreditsInput.value = data.accreditedCredits || '';
+                        accreditedMateriasInput.value = data.accreditedMaterias || '';
+                        schoolPeriodsInput.value = data.schoolPeriods || '';
+                        averageGradeInput.value = data.averageGrade || '';
+                        reprobadasNoInscribirInput.value = data.materiasCount?.reprobadasNoInscribir || '';
+                        reprobadasSiInscribirInput.value = data.materiasCount?.reprobadasSiInscribir || '';
+                        porPrimeraVezInput.value = data.materiasCount?.porPrimeraVez || '';
+                        calculateOldIndicators();
+                        validateAverageGrade();
+                    }
+                    updateFormVisibility(data.materia);
+                    console.log("Datos cargados exitosamente desde Firestore.");
+                }
+            } catch (error) {
+                console.error("Error al cargar datos:", error);
+            }
+        }
+
+        // Función para guardar los datos en Firestore
+        async function saveData(data) {
+            if (!authReady || !userId) {
+                showFeedback("Error de autenticación. No se puede guardar.", false);
+                return;
+            }
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'users', userId, 'academic_form_data', 'my_form');
+                await setDoc(docRef, data, { merge: true });
+                console.log("Datos guardados exitosamente en Firestore.");
+            } catch (error) {
+                console.error("Error al guardar datos:", error);
+            }
+        }
+
+        // Muestra u oculta secciones del formulario
+        function updateFormVisibility(materia) {
+            travelSection.classList.add('section-hidden');
+            indicatorsSection.classList.add('section-hidden');
+            tablesSection.classList.add('section-hidden');
+
+            if (materia) {
+                travelSection.classList.remove('section-hidden');
+            }
+
+            if (materia === 'calculo-2' || materia === 'calculo-3') {
+                indicatorsSection.classList.remove('section-hidden');
+                tablesSection.classList.remove('section-hidden');
+            }
+        }
+
+        // Calcula el tiempo total de traslado
+        function calculateTravelTime() {
+            const h1 = parseInt(homeToSchoolHoursInput.value) || 0;
+            const m1 = parseInt(homeToSchoolMinutesInput.value) || 0;
+            const h2 = parseInt(schoolToHomeHoursInput.value) || 0;
+            const m2 = parseInt(schoolToHomeMinutesInput.value) || 0;
+
+            let totalMinutes = (h1 + h2) * 60 + (m1 + m2);
+            let finalHours = Math.floor(totalMinutes / 60);
+            let finalMinutes = totalMinutes % 60;
+            
+            totalTravelTimeOutput.textContent = `${finalHours}h ${finalMinutes}m`;
+        }
+        
+        // Calcula los indicadores de Avance y Velocidad
+        function calculateOldIndicators() {
+            const accreditedCredits = parseFloat(accreditedCreditsInput.value) || 0;
+            const accreditedMaterias = parseFloat(accreditedMateriasInput.value) || 0;
+            const schoolPeriods = parseFloat(schoolPeriodsInput.value) || 0;
+            
+            const totalProgramCredits = troncoComunData.creditosTotales;
+            const totalProgramSemesters = troncoComunData.semestresTotales;
+            
+            // Calculo de Velocidad
+            if (schoolPeriods > 0) {
+                const velocidad = accreditedMaterias / schoolPeriods;
+                velocidadOutput.textContent = velocidad.toFixed(2);
+            } else {
+                velocidadOutput.textContent = "N/A";
+            }
+
+            // Calculo de Indicador
+            if (totalProgramSemesters > schoolPeriods && totalProgramSemesters > 0) {
+                const remainingCredits = totalProgramCredits - accreditedCredits;
+                const remainingSemesters = totalProgramSemesters - schoolPeriods;
+                
+                if (remainingSemesters > 0) {
+                    const indicador = remainingCredits / remainingSemesters;
+                    indicadorOutput.textContent = indicador.toFixed(2);
+                } else {
+                    indicadorOutput.textContent = "N/A";
+                }
+            } else {
+                indicadorOutput.textContent = "N/A";
+            }
+        }
+
+        // Valida el promedio
+        function validateAverageGrade() {
+            const grade = parseFloat(averageGradeInput.value);
+            if (isNaN(grade) || grade < 6.0) {
+                averageGradeError.classList.remove('hidden');
+            } else {
+                averageGradeError.classList.add('hidden');
+            }
+        }
+
+        // Event Listeners
+        materiaSelect.addEventListener('change', (e) => {
+            updateFormVisibility(e.target.value);
+        });
+
+        const travelTimeInputs = [homeToSchoolHoursInput, homeToSchoolMinutesInput, schoolToHomeHoursInput, schoolToHomeMinutesInput];
+        travelTimeInputs.forEach(input => {
+            input.addEventListener('input', calculateTravelTime);
+        });
+        
+        const oldIndicatorInputs = [accreditedCreditsInput, accreditedMateriasInput, schoolPeriodsInput];
+        oldIndicatorInputs.forEach(input => {
+            input.addEventListener('input', calculateOldIndicators);
+        });
+
+        averageGradeInput.addEventListener('input', validateAverageGrade);
+
+        submitBtn.addEventListener('click', async () => {
+            const selectedMateria = materiaSelect.value;
+
+            // Validación del nombre de una sola palabra
+            if (/\s/.test(preferredNameInput.value)) {
+                showFeedback("Por favor, ingrese solo una palabra en el nombre.", false);
+                return;
+            }
+
+            let dataToSave = {
+                preferredName: preferredNameInput.value,
+                studentId: studentIdInput.value,
+                materia: selectedMateria,
+                travelTime: {
+                    homeToSchoolHours: parseInt(homeToSchoolHoursInput.value) || 0,
+                    homeToSchoolMinutes: parseInt(homeToSchoolMinutesInput.value) || 0,
+                    schoolToHomeHours: parseInt(schoolToHomeHoursInput.value) || 0,
+                    schoolToHomeMinutes: parseInt(schoolToHomeMinutesInput.value) || 0,
+                }
+            };
+
+            // Validaciones
+            if (!preferredNameInput.value || !studentIdInput.value || !selectedMateria) {
+                showFeedback("Por favor, complete los campos básicos.", false);
+                return;
+            }
+
+            if (selectedMateria === 'calculo-2' || selectedMateria === 'calculo-3') {
+                const grade = parseFloat(averageGradeInput.value);
+                if (isNaN(grade) || grade < 6.0) {
+                    showFeedback("Por favor, ingrese un promedio válido (6.0 o mayor).", false);
+                    return;
+                }
+                
+                dataToSave.accreditedCredits = parseInt(accreditedCreditsInput.value) || 0;
+                dataToSave.accreditedMaterias = parseInt(accreditedMateriasInput.value) || 0;
+                dataToSave.schoolPeriods = parseInt(schoolPeriodsInput.value) || 0;
+                dataToSave.averageGrade = grade;
+                dataToSave.materiasCount = {
+                    reprobadasNoInscribir: parseInt(reprobadasNoInscribirInput.value) || 0,
+                    reprobadasSiInscribir: parseInt(reprobadasSiInscribirInput.value) || 0,
+                    porPrimeraVez: parseInt(porPrimeraVezInput.value) || 0,
+                };
+            }
+            
+            showFeedback("Enviando datos...", false);
+            await saveData(dataToSave);
+            showFeedback("✅ Datos enviados y guardados correctamente!", true);
+        });
+        
+        // Iniciar la autenticación al cargar la página
+        authenticate();
+
+    </script>
+</body>
+</html>
