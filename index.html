@@ -461,10 +461,6 @@
                 } else {
                     showFeedback(`Error al enviar los datos: ${result.message}`, false);
                 }
-            } catch (error) {
-                // Este bloque captura errores de red como "Failed to fetch"
-                showFeedback("Error de red o de conexión. Asegúrese de que el script de Google esté desplegado como 'Aplicación web' para que 'Cualquiera' lo ejecute, y que la URL sea correcta. También verifique si tiene conexión a internet.", false);
-                console.error('Error en la conexión:', error);
             }
         });
         
