@@ -35,7 +35,7 @@
 
         <form id="academic-form">
             <section class="p-4 bg-gray-50 rounded-md mb-8 border-l-4" style="border-color: #F7E1D7;">
-                <h2 class="text-xl font-semibold mb-4" style="color: #F7E1D7;">Información Personal</h2>
+                <h2 class="text-xl font-semibold mb-4" style="color: #ff99c8;">Información Personal</h2>
                 <div class="mb-4">
                     <label for="preferred-name" class="block text-sm font-medium text-gray-700">¿Cómo quieres que me refiera a ti?</label>
                     <input type="text" id="preferred-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" placeholder="Ej. Juan" required oninput="this.value = this.value.replace(/\s/g, '')" pattern="^\S+$">
@@ -47,7 +47,7 @@
             </section>
 
             <section class="p-4 bg-gray-50 rounded-md mb-8 border-l-4" style="border-color: #DEDBD2;">
-                <h2 class="text-xl font-semibold mb-4" style="color: #DEDBD2;">Selección de Materia</h2>
+                <h2 class="text-xl font-semibold mb-4" style="color: #a3b18a;">Selección de Materia</h2>
                 <div class="mb-4">
                     <label for="materia-select" class="block text-sm font-medium text-gray-700">Selecciona tu materia:</label>
                     <select id="materia-select" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2">
@@ -130,7 +130,7 @@
             </section>
 
             <section id="tables-section" class="section-hidden p-4 bg-gray-50 rounded-md mb-8 border-l-4" style="border-color: #F7E1D7;">
-                <h2 class="text-xl font-semibold mb-4" style="color: #F7E1D7;">Unidades de Aprendizaje</h2>
+                <h2 class="text-xl font-semibold mb-4" style="color: #ff99c8;">Unidades de Aprendizaje</h2>
                 <div class="space-y-6">
                     <div>
                         <label for="reprobadas-no-inscribir" class="block text-sm font-medium text-gray-700">Número de unidades reprobadas, que NO va a inscribir:</label>
@@ -189,13 +189,24 @@
 
             // Las secciones y sus títulos usan los colores restantes en orden
             const sections = document.querySelectorAll('section');
-            const sectionColors = [accentColors[1], accentColors[2], accentColors[3], accentColors[4]];
             sections.forEach((section, index) => {
-                const color = sectionColors[index % sectionColors.length];
-                section.style.borderColor = color;
+                let titleColor = '';
+                if (index === 0) {
+                    titleColor = '#ff99c8'; // Información Personal
+                } else if (index === 1) {
+                    titleColor = '#a3b18a'; // Selección de Materia
+                } else if (index === 2) {
+                    titleColor = accentColors[3]; // Tiempos de Traslado
+                } else if (index === 3) {
+                    titleColor = accentColors[4]; // Indicadores Académicos
+                } else if (index === 4) {
+                    titleColor = '#ff99c8'; // Unidades de Aprendizaje
+                }
+
+                section.style.borderColor = accentColors[index % accentColors.length]; // Mantener los bordes
                 const title = section.querySelector('h2');
                 if (title) {
-                    title.style.color = color;
+                    title.style.color = titleColor;
                 }
             });
 
@@ -517,3 +528,4 @@
     </script>
 </body>
 </html>
+
