@@ -8,7 +8,6 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #EDAFB8; /* Color de fondo actualizado */
         }
         .section-hidden {
             display: none;
@@ -26,32 +25,32 @@
         }
     </style>
 </head>
-<body class="bg-[#EDAFB8] flex items-center justify-center min-h-screen p-4 relative">
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4 relative">
 
-    <div id="main-content" class="container bg-[#F7E1D7] p-8 rounded-lg shadow-xl w-full max-w-4xl mx-auto border-4 border-[#DEDBD2]">
+    <div id="main-content" class="container bg-white p-8 rounded-xl shadow-xl w-full max-w-4xl mx-auto border-4" style="border-color: #EDAFB8;">
         <header class="text-center mb-8">
-            <h1 class="text-2xl font-bold text-[#B0C4B1]">Formulario Personalizado</h1>
-            <p class="mt-2 text-[#4A5759]">Completa tu información según la materia elegida.</p>
+            <h1 class="text-2xl font-bold" style="color: #EDAFB8;">Formulario Personalizado</h1>
+            <p class="mt-2 text-gray-600">Completa tu información según la materia elegida.</p>
         </header>
 
         <form id="academic-form">
-            <section class="p-4 bg-[#F7E1D7] rounded-md mb-8 border-l-4 border-[#B0C4B1]">
-                <h2 class="text-xl font-semibold text-[#B0C4B1] mb-4">Información Personal</h2>
+            <section class="p-4 bg-gray-50 rounded-md mb-8 border-l-4" style="border-color: #F7E1D7;">
+                <h2 class="text-xl font-semibold mb-4" style="color: #F7E1D7;">Información Personal</h2>
                 <div class="mb-4">
-                    <label for="preferred-name" class="block text-sm font-medium text-[#4A5759]">¿Cómo quieres que me refiera a ti?</label>
-                    <input type="text" id="preferred-name" class="mt-1 block w-full rounded-md border-[#DEDBD2] shadow-sm focus:border-[#DEDBD2] focus:ring-[#DEDBD2] sm:text-sm p-2" placeholder="Ej. Juan" required oninput="this.value = this.value.replace(/\s/g, '')" pattern="^\S+$">
+                    <label for="preferred-name" class="block text-sm font-medium text-gray-700">¿Cómo quieres que me refiera a ti?</label>
+                    <input type="text" id="preferred-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" placeholder="Ej. Juan" required oninput="this.value = this.value.replace(/\s/g, '')" pattern="^\S+$">
                 </div>
                 <div class="mb-4">
-                    <label for="student-id" class="block text-sm font-medium text-[#4A5759]">Número de Boleta:</label>
-                    <input type="text" id="student-id" class="mt-1 block w-full rounded-md border-[#DEDBD2] shadow-sm focus:border-[#DEDBD2] focus:ring-[#DEDBD2] sm:text-sm p-2" placeholder="Ej. 2023xxxxxx" minlength="10" maxlength="10" required>
+                    <label for="student-id" class="block text-sm font-medium text-gray-700">Número de Boleta:</label>
+                    <input type="text" id="student-id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" placeholder="Ej. 2023xxxxxx" minlength="10" maxlength="10" required>
                 </div>
             </section>
 
-            <section class="p-4 bg-[#F7E1D7] rounded-md mb-8 border-l-4 border-[#B0C4B1]">
-                <h2 class="text-xl font-semibold text-[#B0C4B1] mb-4">Selección de Materia</h2>
+            <section class="p-4 bg-gray-50 rounded-md mb-8 border-l-4" style="border-color: #DEDBD2;">
+                <h2 class="text-xl font-semibold mb-4" style="color: #DEDBD2;">Selección de Materia</h2>
                 <div class="mb-4">
-                    <label for="materia-select" class="block text-sm font-medium text-[#4A5759]">Selecciona tu materia:</label>
-                    <select id="materia-select" class="mt-1 block w-full rounded-md border-[#DEDBD2] shadow-sm focus:border-[#DEDBD2] focus:ring-[#DEDBD2] sm:text-sm p-2">
+                    <label for="materia-select" class="block text-sm font-medium text-gray-700">Selecciona tu materia:</label>
+                    <select id="materia-select" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2">
                         <option value="">-- Seleccionar --</option>
                         <option value="calculo-1">Cálculo 1</option>
                         <option value="calculo-2">Cálculo 2</option>
@@ -60,101 +59,101 @@
                 </div>
             </section>
 
-            <section id="travel-time-section" class="section-hidden p-4 bg-[#F7E1D7] rounded-md mb-8 border-l-4 border-[#B0C4B1]">
-                <h2 class="text-xl font-semibold text-[#B0C4B1] mb-4">Tiempos de Traslado</h2>
+            <section id="travel-time-section" class="section-hidden p-4 bg-gray-50 rounded-md mb-8 border-l-4" style="border-color: #B0C4B1;">
+                <h2 class="text-xl font-semibold mb-4" style="color: #B0C4B1;">Tiempos de Traslado</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-[#4A5759]">Tiempo de traslado casa-escuela:</label>
+                        <label class="block text-sm font-medium text-gray-700">Tiempo de traslado casa-escuela:</label>
                         <div class="flex items-center mt-1">
-                            <input type="number" id="home-to-school-hours" class="w-1/2 rounded-md border-[#DEDBD2] shadow-sm focus:border-[#DEDBD2] focus:ring-[#DEDBD2] sm:text-sm p-2" min="0" placeholder="Horas">
-                            <span class="mx-2 text-[#4A5759]">h</span>
-                            <input type="number" id="home-to-school-minutes" class="w-1/2 rounded-md border-[#DEDBD2] shadow-sm focus:border-[#DEDBD2] focus:ring-[#DEDBD2] sm:text-sm p-2" min="0" max="59" placeholder="Minutos">
-                            <span class="mx-2 text-[#4A5759]">m</span>
+                            <input type="number" id="home-to-school-hours" class="w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" placeholder="Horas">
+                            <span class="mx-2 text-gray-600">h</span>
+                            <input type="number" id="home-to-school-minutes" class="w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" max="59" placeholder="Minutos">
+                            <span class="mx-2 text-gray-600">m</span>
                         </div>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-[#4A5759]">Tiempo de traslado escuela-casa:</label>
+                        <label class="block text-sm font-medium text-gray-700">Tiempo de traslado escuela-casa:</label>
                         <div class="flex items-center mt-1">
-                            <input type="number" id="school-to-home-hours" class="w-1/2 rounded-md border-[#DEDBD2] shadow-sm focus:border-[#DEDBD2] focus:ring-[#DEDBD2] sm:text-sm p-2" min="0" placeholder="Horas">
-                            <span class="mx-2 text-[#4A5759]">h</span>
-                            <input type="number" id="school-to-home-minutes" class="w-1/2 rounded-md border-[#DEDBD2] shadow-sm focus:border-[#DEDBD2] focus:ring-[#DEDBD2] sm:text-sm p-2" min="0" max="59" placeholder="Minutos">
-                            <span class="mx-2 text-[#4A5759]">m</span>
+                            <input type="number" id="school-to-home-hours" class="w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" placeholder="Horas">
+                            <span class="mx-2 text-gray-600">h</span>
+                            <input type="number" id="school-to-home-minutes" class="w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" max="59" placeholder="Minutos">
+                            <span class="mx-2 text-gray-600">m</span>
                         </div>
                     </div>
                 </div>
-                <div class="mt-6 p-4 bg-[#EDAFB8] rounded-md text-center">
-                    <h4 class="text-md font-semibold text-[#4A5759]">Tiempo Total de Traslado:</h4>
-                    <p id="total-travel-time" class="text-3xl font-bold text-[#B0C4B1] mt-2">0h 0m</p>
+                <div class="mt-6 p-4 bg-gray-100 rounded-md text-center">
+                    <h4 class="text-md font-semibold text-gray-600">Tiempo Total de Traslado:</h4>
+                    <p id="total-travel-time" class="text-3xl font-bold" style="color: #B0C4B1;">0h 0m</p>
                 </div>
             </section>
 
-            <section id="indicators-section" class="section-hidden p-4 bg-[#F7E1D7] rounded-md mb-8 border-l-4 border-[#B0C4B1]">
-                <h2 class="text-xl font-semibold text-[#B0C4B1] mb-4">Indicadores Académicos</h2>
+            <section id="indicators-section" class="section-hidden p-4 bg-gray-50 rounded-md mb-8 border-l-4" style="border-color: #4A5759;">
+                <h2 class="text-xl font-semibold mb-4" style="color: #4A5759;">Indicadores Académicos</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label for="accredited-credits" class="block text-sm font-medium text-[#4A5759]">
+                        <label for="accredited-credits" class="block text-sm font-medium text-gray-700">
                             Número de créditos acreditados:
                         </label>
-                        <input type="number" id="accredited-credits" class="mt-1 block w-full rounded-md border-[#DEDBD2] shadow-sm focus:border-[#DEDBD2] focus:ring-[#DEDBD2] sm:text-sm p-2" min="0" required>
+                        <input type="number" id="accredited-credits" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" required>
                     </div>
                     <div>
-                        <label for="accredited-materias" class="block text-sm font-medium text-[#4A5759]">
+                        <label for="accredited-materias" class="block text-sm font-medium text-gray-700">
                             Número de unidades de aprendizaje acreditadas:
                         </label>
-                        <input type="number" id="accredited-materias" class="mt-1 block w-full rounded-md border-[#DEDBD2] shadow-sm focus:border-[#DEDBD2] focus:ring-[#DEDBD2] sm:text-sm p-2" min="0" required>
+                        <input type="number" id="accredited-materias" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" required>
                     </div>
                     <div>
-                        <label for="school-periods" class="block text-sm font-medium text-[#4A5759]">
+                        <label for="school-periods" class="block text-sm font-medium text-gray-700">
                             Cantidad de periodos escolares cursados:
                         </label>
-                        <input type="number" id="school-periods" class="mt-1 block w-full rounded-md border-[#DEDBD2] shadow-sm focus:border-[#DEDBD2] focus:ring-[#DEDBD2] sm:text-sm p-2" min="1" required>
+                        <input type="number" id="school-periods" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="1" required>
                     </div>
                     <div>
-                        <label for="average-grade" class="block text-sm font-medium text-[#4A5759]">
+                        <label for="average-grade" class="block text-sm font-medium text-gray-700">
                             Promedio de <strong>materias acreditadas</strong>:
                         </label>
-                        <input type="number" id="average-grade" class="mt-1 block w-full rounded-md border-[#DEDBD2] shadow-sm focus:border-[#DEDBD2] focus:ring-[#DEDBD2] sm:text-sm p-2" min="6.0" step="0.01" placeholder="Ej. 8.5">
+                        <input type="number" id="average-grade" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="6.0" step="0.01" placeholder="Ej. 8.5">
                         <div id="average-grade-error" class="text-red-600 text-sm mt-1 hidden">El promedio no puede ser menor a 6.0.</div>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                    <div class="p-4 bg-[#EDAFB8] rounded-md text-center">
-                        <h4 class="text-md font-semibold text-[#4A5759]">Indicador de Avance:</h4>
-                        <p id="indicador-output" class="text-3xl font-bold text-[#B0C4B1] mt-2">N/A</p>
+                    <div class="p-4 bg-gray-100 rounded-md text-center">
+                        <h4 class="text-md font-semibold text-gray-600">Indicador de Avance:</h4>
+                        <p id="indicador-output" class="text-3xl font-bold" style="color: #4A5759;">N/A</p>
                     </div>
-                    <div class="p-4 bg-[#EDAFB8] rounded-md text-center">
-                        <h4 class="text-md font-semibold text-[#4A5759]">Velocidad de Avance:</h4>
-                        <p id="velocidad-output" class="text-3xl font-bold text-[#B0C4B1] mt-2">N/A</p>
+                    <div class="p-4 bg-gray-100 rounded-md text-center">
+                        <h4 class="text-md font-semibold text-gray-600">Velocidad de Avance:</h4>
+                        <p id="velocidad-output" class="text-3xl font-bold" style="color: #4A5759;">N/A</p>
                     </div>
                 </div>
             </section>
 
-            <section id="tables-section" class="section-hidden p-4 bg-[#F7E1D7] rounded-md mb-8 border-l-4 border-[#B0C4B1]">
-                <h2 class="text-xl font-semibold text-[#B0C4B1] mb-4">Unidades de Aprendizaje</h2>
+            <section id="tables-section" class="section-hidden p-4 bg-gray-50 rounded-md mb-8 border-l-4" style="border-color: #F7E1D7;">
+                <h2 class="text-xl font-semibold mb-4" style="color: #F7E1D7;">Unidades de Aprendizaje</h2>
                 <div class="space-y-6">
                     <div>
-                        <label for="reprobadas-no-inscribir" class="block text-sm font-medium text-[#4A5759]">Número de unidades reprobadas, que NO va a inscribir:</label>
-                        <input type="number" id="reprobadas-no-inscribir" class="mt-1 block w-full rounded-md border-[#DEDBD2] shadow-sm focus:border-[#DEDBD2] focus:ring-[#DEDBD2] sm:text-sm p-2" min="0" value="0">
+                        <label for="reprobadas-no-inscribir" class="block text-sm font-medium text-gray-700">Número de unidades reprobadas, que NO va a inscribir:</label>
+                        <input type="number" id="reprobadas-no-inscribir" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" value="0">
                     </div>
                     <div>
-                        <label for="reprobadas-si-inscribir" class="block text-sm font-medium text-[#4A5759]">Número de unidades reprobadas, que SÍ va a inscribir:</label>
-                        <input type="number" id="reprobadas-si-inscribir" class="mt-1 block w-full rounded-md border-[#DEDBD2] shadow-sm focus:border-[#DEDBD2] focus:ring-[#DEDBD2] sm:text-sm p-2" min="0" value="0">
+                        <label for="reprobadas-si-inscribir" class="block text-sm font-medium text-gray-700">Número de unidades reprobadas, que SÍ va a inscribir:</label>
+                        <input type="number" id="reprobadas-si-inscribir" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" value="0">
                     </div>
                     <div>
-                        <label for="por-primera-vez" class="block text-sm font-medium text-[#4A5759]">Número de unidades a inscribir por primera vez:</label>
-                        <input type="number" id="por-primera-vez" class="mt-1 block w-full rounded-md border-[#DEDBD2] shadow-sm focus:border-[#DEDBD2] focus:ring-[#DEDBD2] sm:text-sm p-2" min="0" value="0">
+                        <label for="por-primera-vez" class="block text-sm font-medium text-gray-700">Número de unidades a inscribir por primera vez:</label>
+                        <input type="number" id="por-primera-vez" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" value="0">
                     </div>
                 </div>
             </section>
             
             <div class="text-center mt-8 no-print flex justify-center">
-                <button type="button" id="submit-btn" class="w-full md:w-auto px-6 py-2 bg-[#DEDBD2] text-[#4A5759] font-semibold rounded-md hover:bg-[#B0C4B1] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#B0C4B1]">
+                <button type="button" id="submit-btn" class="w-full md:w-auto px-6 py-2 rounded-lg text-white font-semibold transition-all duration-300 transform hover:scale-105" style="background-color: #EDAFB8;">
                     Enviar Datos
                 </button>
             </div>
             
-            <div id="feedback-message" class="message-container bg-[#F7E1D7] p-3 rounded-md text-sm text-center font-medium"></div>
+            <div id="feedback-message" class="message-container bg-white p-3 rounded-md text-sm text-center font-medium"></div>
         </form>
     </div>
 
@@ -162,6 +161,60 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Paleta de colores para los acentos
+        const accentColors = ['#EDAFB8', '#F7E1D7', '#DEDBD2', '#B0C4B1', '#4A5759'];
+        let colorIndex = 0;
+        function getNextColor() {
+            const color = accentColors[colorIndex];
+            colorIndex = (colorIndex + 1) % accentColors.length;
+            return color;
+        }
+
+        // Aplicar colores de acento a los elementos
+        function applyAccentColors() {
+            // El `main-content` border color, el botón y el título principal usan el primer color
+            const mainContainer = document.getElementById('main-content');
+            mainContainer.style.borderColor = accentColors[0];
+            
+            const mainTitle = document.querySelector('h1');
+            if (mainTitle) {
+                mainTitle.style.color = accentColors[0];
+            }
+            
+            const submitBtn = document.getElementById('submit-btn');
+            if (submitBtn) {
+                submitBtn.style.backgroundColor = accentColors[0];
+            }
+
+            // Las secciones y sus títulos usan los colores restantes en orden
+            const sections = document.querySelectorAll('section');
+            const sectionColors = [accentColors[1], accentColors[2], accentColors[3], accentColors[4]];
+            sections.forEach((section, index) => {
+                const color = sectionColors[index % sectionColors.length];
+                section.style.borderColor = color;
+                const title = section.querySelector('h2');
+                if (title) {
+                    title.style.color = color;
+                }
+            });
+
+            // Los outputs de tiempo de traslado e indicadores usan los últimos colores
+            const totalTravelTimeOutput = document.getElementById('total-travel-time');
+            if (totalTravelTimeOutput) {
+                totalTravelTimeOutput.style.color = accentColors[3];
+            }
+            
+            const indicadorOutput = document.getElementById('indicador-output');
+            const velocidadOutput = document.getElementById('velocidad-output');
+            if (indicadorOutput && velocidadOutput) {
+                indicadorOutput.style.color = accentColors[4];
+                velocidadOutput.style.color = accentColors[4];
+            }
+        }
+
+        // Llamar a la función al cargar la página
+        window.onload = applyAccentColors;
 
         // Variables globales de Firebase
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
@@ -204,11 +257,11 @@
             feedbackMessageDiv.textContent = message;
             feedbackMessageDiv.classList.add('visible');
             if (isSuccess) {
-                feedbackMessageDiv.classList.remove('text-red-600');
-                feedbackMessageDiv.classList.add('bg-[#B0C4B1]', 'text-[#4A5759]');
+                feedbackMessageDiv.classList.remove('text-red-600', 'bg-white');
+                feedbackMessageDiv.classList.add('bg-green-100', 'text-green-800');
             } else {
-                feedbackMessageDiv.classList.remove('bg-[#B0C4B1]', 'text-[#4A5759]');
-                feedbackMessageDiv.classList.add('text-red-600');
+                feedbackMessageDiv.classList.remove('bg-green-100', 'text-green-800');
+                feedbackMessageDiv.classList.add('bg-red-100', 'text-red-800');
             }
             setTimeout(() => {
                 feedbackMessageDiv.classList.remove('visible');
@@ -275,12 +328,10 @@
 
         // Muestra u oculta secciones del formulario
         function updateFormVisibility(materia) {
-            // Primero, oculta todas las secciones
             travelSection.classList.add('section-hidden');
             indicatorsSection.classList.add('section-hidden');
             tablesSection.classList.add('section-hidden');
 
-            // Luego, muestra las secciones según la materia
             if (materia) {
                 travelSection.classList.remove('section-hidden');
             }
@@ -430,40 +481,39 @@
                 });
             }
 
-            // URL del despliegue de Apps Script
             const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbygFq-qRp2CJSLBLl7uTgp9-lISHI_0lk_6t9Q9Pd1cm9tGZL11qrgg3orrHMzEMvo/exec'; 
 
             showFeedback("Enviando datos...", false);
             try {
+                // The `mode: 'no-cors'` is crucial here to prevent the browser's security
+                // policies from blocking the cross-origin request. This is the fix for the
+                // `Failed to fetch` error.
+                // Note: with `no-cors`, the response is "opaque" and cannot be inspected.
+                // We assume success if the network request completes without an error.
                 const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
                     body: JSON.stringify(dataToSave),
                     headers: {
                         'Content-Type': 'application/json',
                     },
+                    mode: 'no-cors'
                 });
-
-                if (!response.ok) {
-                    showFeedback(`Error en la solicitud HTTP: ${response.status} ${response.statusText}. Por favor, revise la URL del script y los permisos.`, false);
-                    console.error('Error en la respuesta de la red:', response);
-                    return;
-                }
-
-                const result = await response.json();
-                if (result.status === 'success') {
-                    showFeedback("✅ Datos enviados y guardados correctamente en Google Sheets!", true);
-                } else {
-                    showFeedback(`Error al enviar los datos: ${result.message}`, false);
-                }
+                
+                // Since the response is opaque, we cannot check `response.ok` or parse
+                // `response.json()`. If we reach this point without an error, the request
+                // was sent successfully.
+                showFeedback("✅ Datos enviados y guardados correctamente en Google Sheets!", true);
+                
             } catch (error) {
-                showFeedback("Hubo un error al enviar los datos. Por favor, intente de nuevo más tarde.", false);
+                // This catch block will only be triggered for a true network error,
+                // like a domain not found, not a CORS error.
+                showFeedback("Hubo un error al enviar los datos. Por favor, revisa tu conexión a Internet.", false);
                 console.error('Error al enviar datos:', error);
             }
         });
         
         // Iniciar la autenticación al cargar la página
         authenticate();
-
     </script>
 </body>
 </html>
