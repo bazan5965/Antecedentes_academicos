@@ -27,29 +27,29 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4 relative">
 
-    <div id="main-content" class="container bg-white p-8 rounded-xl shadow-xl w-full max-w-4xl mx-auto border-4" style="border-color: #EDAFB8;">
+    <div id="main-content" class="container bg-white p-8 rounded-xl shadow-xl w-full max-w-4xl mx-auto border-4" style="border-color: #F4ACB7;">
         <header class="text-center mb-8">
-            <h1 class="text-2xl font-bold" style="color: #EDAFB8;">Antecedentes Académicos</h1>
+            <h1 class="text-2xl font-bold" style="color: #F4ACB7;">Antecedentes Académicos</h1>
             <p class="mt-2 text-gray-600">Completa la información según la materia que cursas.</p>
         </header>
 
         <form id="academic-form">
-            <section class="p-4 bg-gray-50 rounded-md mb-8 border-l-4" style="border-color: #F7E1D7;">
-                <h2 class="text-xl font-semibold mb-4" style="color: #ff99c8;">Información Personal</h2>
+            <section class="p-4 bg-gray-50 rounded-md mb-8 border-l-4" style="border-color: #FB6F92;">
+                <h2 class="text-xl font-semibold mb-4" style="color: #FB6F92;">Información Personal</h2>
                 <div class="mb-4">
                     <label for="preferred-name" class="block text-sm font-medium text-gray-700">¿Con qué nombre prefieres que me refiera a ti? (Sólo un nombre)</label>
                     <input type="text" id="preferred-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" placeholder="Ej. Juan" required oninput="this.value = this.value.replace(/\s/g, '')" pattern="^\S+$">
                 </div>
                 <div class="mb-4">
                     <label for="student-id" class="block text-sm font-medium text-gray-700">Número de Boleta:</label>
-                    <input type="text" id="student-id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" placeholder="Ej. 2023xxxxxx" minlength="10" maxlength="10" required>
+                    <input type="text" id="student-id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" placeholder="Ej. 2023xxxxxx" minlength="10" maxlength="10" pattern="\d{10}" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                 </div>
             </section>
 
-            <section class="p-4 bg-gray-50 rounded-md mb-8 border-l-4" style="border-color: #DEDBD2;">
-                <h2 class="text-xl font-semibold mb-4" style="color: #a3b18a;">Selección de Materia</h2>
+            <section class="p-4 bg-gray-50 rounded-md mb-8 border-l-4" style="border-color: #FFCAD4;">
+                <h2 class="text-xl font-semibold mb-4" style="color: #FFCAD4;">Selección de Materia</h2>
                 <div class="mb-4">
-                    <label for="materia-select" class="block text-sm font-medium text-gray-700">Selecciona la materia que cursa:</label>
+                    <label for="materia-select" class="block text-sm font-medium text-gray-700">Selecciona la materia que cursas:</label>
                     <select id="materia-select" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2">
                         <option value="">-- Seleccionar --</option>
                         <option value="calculo-1">Cálculo 1</option>
@@ -59,60 +59,60 @@
                 </div>
             </section>
 
-            <section id="travel-time-section" class="section-hidden p-4 bg-gray-50 rounded-md mb-8 border-l-4" style="border-color: #B0C4B1;">
-                <h2 class="text-xl font-semibold mb-4" style="color: #B0C4B1;">Tiempos de Traslado</h2>
+            <section id="travel-time-section" class="section-hidden p-4 bg-gray-50 rounded-md mb-8 border-l-4" style="border-color: #4F518C;">
+                <h2 class="text-xl font-semibold mb-4" style="color: #4F518C;">Tiempos de Traslado</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Tiempo de traslado casa-escuela:</label>
                         <div class="flex items-center mt-1">
-                            <input type="number" id="home-to-school-hours" class="w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" placeholder="Horas">
+                            <input type="text" id="home-to-school-hours" class="w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" placeholder="Horas" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                             <span class="mx-2 text-gray-600">h</span>
-                            <input type="number" id="home-to-school-minutes" class="w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" max="59" placeholder="Minutos">
+                            <input type="text" id="home-to-school-minutes" class="w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" max="59" placeholder="Minutos" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                             <span class="mx-2 text-gray-600">m</span>
                         </div>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Tiempo de traslado escuela-casa:</label>
                         <div class="flex items-center mt-1">
-                            <input type="number" id="school-to-home-hours" class="w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" placeholder="Horas">
+                            <input type="text" id="school-to-home-hours" class="w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" placeholder="Horas" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                             <span class="mx-2 text-gray-600">h</span>
-                            <input type="number" id="school-to-home-minutes" class="w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" max="59" placeholder="Minutos">
+                            <input type="text" id="school-to-home-minutes" class="w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" max="59" placeholder="Minutos" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                             <span class="mx-2 text-gray-600">m</span>
                         </div>
                     </div>
                 </div>
                 <div class="mt-6 p-4 bg-gray-100 rounded-md text-center">
                     <h4 class="text-md font-semibold text-gray-600">Tiempo Total de Traslado:</h4>
-                    <p id="total-travel-time" class="text-3xl font-bold" style="color: #B0C4B1;">0h 0m</p>
+                    <p id="total-travel-time" class="text-3xl font-bold" style="color: #4F518C;">0h 0m</p>
                 </div>
             </section>
 
-            <section id="indicators-section" class="section-hidden p-4 bg-gray-50 rounded-md mb-8 border-l-4" style="border-color: #4A5759;">
-                <h2 class="text-xl font-semibold mb-4" style="color: #4A5759;">Indicadores Académicos</h2>
+            <section id="indicators-section" class="section-hidden p-4 bg-gray-50 rounded-md mb-8 border-l-4" style="border-color: #62BFED;">
+                <h2 class="text-xl font-semibold mb-4" style="color: #62BFED;">Indicadores Académicos</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
                         <label for="accredited-credits" class="block text-sm font-medium text-gray-700">
                             Número de créditos acreditados:
                         </label>
-                        <input type="number" id="accredited-credits" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" required>
+                        <input type="text" id="accredited-credits" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                     </div>
                     <div>
                         <label for="accredited-materias" class="block text-sm font-medium text-gray-700">
                             Número de unidades de aprendizaje acreditadas:
                         </label>
-                        <input type="number" id="accredited-materias" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" required>
+                        <input type="text" id="accredited-materias" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                     </div>
                     <div>
                         <label for="school-periods" class="block text-sm font-medium text-gray-700">
                             Cantidad de periodos escolares cursados:
                         </label>
-                        <input type="number" id="school-periods" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="1" required>
+                        <input type="text" id="school-periods" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="1" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                     </div>
                     <div>
                         <label for="average-grade" class="block text-sm font-medium text-gray-700">
                             Promedio de <strong>materias acreditadas</strong>:
                         </label>
-                        <input type="number" id="average-grade" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="6.0" step="0.01" placeholder="Ej. 8.5">
+                        <input type="text" id="average-grade" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="6.0" step="0.01" placeholder="Ej. 8.5" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         <div id="average-grade-error" class="text-red-600 text-sm mt-1 hidden">El promedio no puede ser menor a 6.0.</div>
                     </div>
                 </div>
@@ -120,35 +120,35 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
                     <div class="p-4 bg-gray-100 rounded-md text-center">
                         <h4 class="text-md font-semibold text-gray-600">Indicador de Avance:</h4>
-                        <p id="indicador-output" class="text-3xl font-bold" style="color: #4A5759;">N/A</p>
+                        <p id="indicador-output" class="text-3xl font-bold" style="color: #62BFED;">N/A</p>
                     </div>
                     <div class="p-4 bg-gray-100 rounded-md text-center">
                         <h4 class="text-md font-semibold text-gray-600">Velocidad de Avance:</h4>
-                        <p id="velocidad-output" class="text-3xl font-bold" style="color: #4A5759;">N/A</p>
+                        <p id="velocidad-output" class="text-3xl font-bold" style="color: #62BFED;">N/A</p>
                     </div>
                 </div>
             </section>
 
-            <section id="tables-section" class="section-hidden p-4 bg-gray-50 rounded-md mb-8 border-l-4" style="border-color: #F7E1D7;">
-                <h2 class="text-xl font-semibold mb-4" style="color: #ff99c8;">Unidades de Aprendizaje</h2>
+            <section id="tables-section" class="section-hidden p-4 bg-gray-50 rounded-md mb-8 border-l-4" style="border-color: #F4ACB7;">
+                <h2 class="text-xl font-semibold mb-4" style="color: #F4ACB7;">Unidades de Aprendizaje</h2>
                 <div class="space-y-6">
                     <div>
                         <label for="reprobadas-no-inscribir" class="block text-sm font-medium text-gray-700">Número de unidades reprobadas, que NO va a inscribir:</label>
-                        <input type="number" id="reprobadas-no-inscribir" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" value="0">
+                        <input type="text" id="reprobadas-no-inscribir" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" value="0" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                     </div>
                     <div>
                         <label for="reprobadas-si-inscribir" class="block text-sm font-medium text-gray-700">Número de unidades reprobadas, que SÍ va a inscribir:</label>
-                        <input type="number" id="reprobadas-si-inscribir" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" value="0">
+                        <input type="text" id="reprobadas-si-inscribir" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" value="0" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                     </div>
                     <div>
                         <label for="por-primera-vez" class="block text-sm font-medium text-gray-700">Número de unidades a inscribir por primera vez:</label>
-                        <input type="number" id="por-primera-vez" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" value="0">
+                        <input type="text" id="por-primera-vez" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm p-2" min="0" value="0" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                     </div>
                 </div>
             </section>
             
             <div class="text-center mt-8 no-print flex justify-center">
-                <button type="button" id="submit-btn" class="w-full md:w-auto px-6 py-2 rounded-lg text-white font-semibold transition-all duration-300 transform hover:scale-105" style="background-color: #EDAFB8;">
+                <button type="button" id="submit-btn" class="w-full md:w-auto px-6 py-2 rounded-lg text-white font-semibold transition-all duration-300 transform hover:scale-105" style="background-color: #F4ACB7;">
                     Enviar Datos
                 </button>
             </div>
@@ -163,7 +163,7 @@
         import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Paleta de colores para los acentos
-        const accentColors = ['#EDAFB8', '#F7E1D7', '#DEDBD2', '#B0C4B1', '#4A5759'];
+        const accentColors = ['#F4ACB7', '#FB6F92', '#FFCAD4', '#4F518C', '#62BFED'];
         let colorIndex = 0;
         function getNextColor() {
             const color = accentColors[colorIndex];
@@ -175,38 +175,21 @@
         function applyAccentColors() {
             // El `main-content` border color, el botón y el título principal usan el primer color
             const mainContainer = document.getElementById('main-content');
-            mainContainer.style.borderColor = accentColors[0];
-            
             const mainTitle = document.querySelector('h1');
-            if (mainTitle) {
-                mainTitle.style.color = accentColors[0];
-            }
-            
             const submitBtn = document.getElementById('submit-btn');
-            if (submitBtn) {
-                submitBtn.style.backgroundColor = accentColors[0];
-            }
+            
+            mainContainer.style.borderColor = accentColors[0];
+            if (mainTitle) { mainTitle.style.color = accentColors[0]; }
+            if (submitBtn) { submitBtn.style.backgroundColor = accentColors[0]; }
 
             // Las secciones y sus títulos usan los colores restantes en orden
             const sections = document.querySelectorAll('section');
             sections.forEach((section, index) => {
-                let titleColor = '';
-                if (index === 0) {
-                    titleColor = '#ff99c8'; // Información Personal
-                } else if (index === 1) {
-                    titleColor = '#a3b18a'; // Selección de Materia
-                } else if (index === 2) {
-                    titleColor = accentColors[3]; // Tiempos de Traslado
-                } else if (index === 3) {
-                    titleColor = accentColors[4]; // Indicadores Académicos
-                } else if (index === 4) {
-                    titleColor = '#ff99c8'; // Unidades de Aprendizaje
-                }
-
-                section.style.borderColor = accentColors[index % accentColors.length]; // Mantener los bordes
+                const color = accentColors[index + 1] || accentColors[0];
+                section.style.borderColor = color;
                 const title = section.querySelector('h2');
                 if (title) {
-                    title.style.color = titleColor;
+                    title.style.color = color;
                 }
             });
 
@@ -429,6 +412,13 @@
 
         submitBtn.addEventListener('click', async () => {
             const selectedMateria = materiaSelect.value;
+            const studentId = studentIdInput.value;
+
+            // Validación de Boleta
+            if (!/^\d{10}$/.test(studentId)) {
+                showFeedback("El número de boleta debe contener exactamente 10 dígitos.", false);
+                return;
+            }
 
             // Validación del nombre de una sola palabra
             if (/\s/.test(preferredNameInput.value)) {
@@ -436,8 +426,8 @@
                 return;
             }
 
-            // Validaciones
-            if (!preferredNameInput.value || !studentIdInput.value || !selectedMateria) {
+            // Validaciones básicas
+            if (!preferredNameInput.value || !studentId || !selectedMateria) {
                 showFeedback("Por favor, complete los campos básicos.", false);
                 return;
             }
@@ -451,7 +441,7 @@
 
             let dataToSave = {
                 preferredName: preferredNameInput.value,
-                studentId: studentIdInput.value,
+                studentId: studentId,
                 materia: selectedMateria,
                 travelTime: {
                     homeToSchoolFormatted: homeToSchoolFormatted,
@@ -461,15 +451,30 @@
             };
 
             if (selectedMateria === 'calculo-2' || selectedMateria === 'calculo-3') {
+                const accreditedCredits = parseInt(accreditedCreditsInput.value) || 0;
+                const accreditedMaterias = parseInt(accreditedMateriasInput.value) || 0;
+                const schoolPeriods = parseInt(schoolPeriodsInput.value) || 0;
                 const grade = parseFloat(averageGradeInput.value);
+
+                // Validaciones para indicadores académicos
+                if (isNaN(accreditedCredits) || accreditedCredits < 0) {
+                    showFeedback("Por favor, ingrese un número de créditos acreditados válido (entero positivo).", false);
+                    return;
+                }
+                if (isNaN(accreditedMaterias) || accreditedMaterias < 0) {
+                    showFeedback("Por favor, ingrese un número de unidades acreditadas válido (entero positivo).", false);
+                    return;
+                }
+                if (isNaN(schoolPeriods) || schoolPeriods < 1) {
+                    showFeedback("Por favor, ingrese una cantidad de periodos escolares válida (entero positivo).", false);
+                    return;
+                }
                 if (isNaN(grade) || grade < 6.0) {
                     showFeedback("Por favor, ingrese un promedio válido (6.0 o mayor).", false);
                     return;
                 }
 
-                const accreditedCredits = parseFloat(accreditedCreditsInput.value) || 0;
-                const accreditedMaterias = parseFloat(accreditedMateriasInput.value) || 0;
-                const schoolPeriods = parseFloat(schoolPeriodsInput.value) || 0;
+
                 const totalProgramCredits = troncoComunData.creditosTotales;
                 const totalProgramSemesters = troncoComunData.semestresTotales;
                 const remainingCredits = totalProgramCredits - accreditedCredits;
@@ -528,4 +533,3 @@
     </script>
 </body>
 </html>
-
